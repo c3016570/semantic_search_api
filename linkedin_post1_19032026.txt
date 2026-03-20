@@ -1,0 +1,53 @@
+The following video shows an end-to-end Retrieveal Augmented Generation (RAG) system that 
+
+performs semantic search and generates answer using retrieved context.
+
+What we see below, is normal for a small RAG system. There is an 
+important concept that is being highlighted : The generator is hallucinating 
+because the retrieved concept does not contain the answer.
+
+
+Our retriever ( that uses FAISS + sentence-transformers ) returned:
+
+used in many language tasks
+Transformers are powerful NLP models
+Flask is a lightweight API framework
+
+These documents do not contain information about machine learning.
+
+Our generator has received this prompt internally : 
+
+Context:
+used in many language tasks
+Transformers are powerful NLP models
+Flask is a lightweight API framework
+
+Question:
+What is machine learning?
+
+Since the context has no answer, our model used its pretrained knowledge 
+and tried to answer.
+
+Hence, it generated : 
+
+Machine Learning (machine code) can be implemented...
+
+This is called LLM hallucination. 
+
+"Language models are known to produce overconfident, plausible falsehoods, 
+which diminish their utility and trustworthiness. This error mode is known as 'hallucination,' 
+though it differs fundamentally from the human perceptual experience. "
+
+To improve this, what we can do :
+
+- Use better prompts with guard condition
+- Use of relevance thresholds and context similarity while document selection
+- Building effective data pipelines, that will lead to better retrieval quality
+ 
+and many more.
+
+
+ 
+https://openai.com/index/why-language-models-hallucinate/
+ 
+https://chatgpt.com/share/69bbc562-9b28-8004-8787-c9ead2b53fc0
